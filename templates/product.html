@@ -1,0 +1,353 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sushi by Fedia — Produit</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .product-page {
+            max-width: 850px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .product-photo {
+            width: 100%;
+            max-height: 450px;
+            object-fit: cover;
+            border-radius: 22px;
+            background: #FADADD;
+        }
+
+        .product-info {
+            background: white;
+            padding: 25px;
+            border-radius: 22px;
+            margin-top: 20px;
+            box-shadow: 0 8px 25px rgba(113, 61, 75, .08);
+        }
+
+        .product-info h1 {
+            margin-bottom: 12px;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            margin: 25px 0;
+        }
+
+        .quantity-control button {
+            width: 45px;
+            height: 45px;
+            border: 0;
+            border-radius: 50%;
+            background: #FADADD;
+            color: #713D4B;
+            font-size: 25px;
+            cursor: pointer;
+        }
+
+        .quantity-control span {
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        .total-price {
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 22px;
+        }
+
+        .instagram-button {
+            display: inline-block;
+            background: #713D4B;
+            color: white;
+            padding: 14px 22px;
+            border-radius: 30px;
+            text-decoration: none;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #713D4B;
+        }
+      
+/* ===== ANIMATIONS SUSHI BY FEDIA ===== */
+
+.product-page {
+    animation: pageReveal 1s cubic-bezier(.2,.8,.2,1) both;
+}
+
+/* ظهور الصورة بحركة سينمائية */
+.product-photo {
+    display: block;
+    animation: photoReveal 1.2s cubic-bezier(.16,1,.3,1) both;
+    box-shadow: 0 15px 40px rgba(113, 61, 75, 0.12);
+    transition: transform .6s ease, box-shadow .6s ease;
+}
+
+.product-photo:hover {
+    transform: scale(1.025) rotate(-.5deg);
+    box-shadow: 0 25px 55px rgba(244, 167, 185, .4);
+}
+
+/* صندوق المعلومات */
+.product-info {
+    animation: infoReveal 1s .25s ease both;
+    border: 1px solid rgba(244, 167, 185, .45);
+    transition: box-shadow .4s ease, transform .4s ease;
+}
+
+.product-info:hover {
+    box-shadow: 0 18px 45px rgba(244, 167, 185, .25);
+    transform: translateY(-3px);
+}
+
+/* العنوان */
+.product-info h1 {
+    color: #713D4B;
+    animation: titleReveal 1s .35s ease both;
+    text-shadow: 0 3px 15px rgba(244, 167, 185, .25);
+}
+
+/* الوصف */
+.product-info > p:first-of-type {
+    color: #A65370;
+    font-size: 19px;
+    line-height: 1.8;
+    animation: textReveal .9s .5s ease both;
+}
+
+/* السعر */
+.product-info h2 {
+    display: inline-block;
+    color: #B54770;
+    animation: priceReveal 1s .65s ease both;
+    transition: transform .3s ease, text-shadow .3s ease;
+}
+
+.product-info h2:hover {
+    transform: scale(1.1);
+    text-shadow: 0 0 18px rgba(244, 167, 185, .8);
+}
+
+/* زر الرجوع إلى القائمة */
+.back-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    overflow: hidden;
+    padding: 12px 20px;
+    margin-bottom: 24px;
+    border: 1px solid #F4A7B9;
+    border-radius: 50px;
+    background: linear-gradient(120deg, #FFF7F8, #FADADD, #FFF7F8);
+    background-size: 200% 200%;
+    color: #713D4B;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 5px 18px rgba(244, 167, 185, .22);
+    animation: backReveal .9s .15s ease both, pinkShimmer 5s ease infinite;
+    transition: color .35s ease, transform .35s ease,
+                box-shadow .35s ease, border-color .35s ease;
+}
+
+.back-link::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 65%;
+    height: 100%;
+    background: linear-gradient(
+        100deg,
+        transparent,
+        rgba(255, 255, 255, .9),
+        transparent
+    );
+    transform: skewX(-20deg);
+    transition: left .65s ease;
+}
+
+.back-link:hover::before {
+    left: 150%;
+}
+
+.back-link:hover {
+    color: white;
+    border-color: #713D4B;
+    background: linear-gradient(135deg, #F4A7B9, #713D4B);
+    transform: translateX(-5px) scale(1.04);
+    box-shadow: 0 10px 30px rgba(113, 61, 75, .3);
+}
+
+.back-link:active {
+    transform: scale(.96);
+}
+
+/* أزرار الكمية */
+.quantity-control button {
+    transition: transform .25s ease, box-shadow .25s ease,
+                background .25s ease;
+}
+
+.quantity-control button:hover {
+    background: #F4A7B9;
+    transform: scale(1.15) rotate(8deg);
+    box-shadow: 0 5px 15px rgba(244, 167, 185, .4);
+}
+
+.quantity-control button:active {
+    transform: scale(.9);
+}
+
+#quantity,
+#total {
+    transition: color .25s ease, text-shadow .25s ease;
+}
+
+.total-price {
+    color: #713D4B;
+    animation: textReveal .8s .75s ease both;
+}
+
+/* زر الطلب */
+.instagram-button {
+    position: relative;
+    overflow: hidden;
+    transition: transform .3s ease, box-shadow .3s ease;
+    box-shadow: 0 6px 20px rgba(113, 61, 75, .18);
+}
+
+.instagram-button:hover {
+    transform: translateY(-4px) scale(1.04);
+    box-shadow: 0 12px 28px rgba(113, 61, 75, .3);
+}
+
+.instagram-button:active {
+    transform: scale(.97);
+}
+
+/* الحركات */
+@keyframes pageReveal {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes photoReveal {
+    from {
+        opacity: 0;
+        transform: translateY(35px) scale(.94);
+        filter: blur(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+@keyframes infoReveal {
+    from { opacity: 0; transform: translateY(35px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes titleReveal {
+    from { opacity: 0; transform: translateY(18px); letter-spacing: 3px; }
+    to { opacity: 1; transform: translateY(0); letter-spacing: normal; }
+}
+
+@keyframes textReveal {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes priceReveal {
+    0% { opacity: 0; transform: scale(.7); }
+    70% { opacity: 1; transform: scale(1.08); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes backReveal {
+    from { opacity: 0; transform: translateX(-25px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pinkShimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* احترام إعدادات تقليل الحركة */
+@media (prefers-reduced-motion: reduce) {
+    .product-page,
+    .product-photo,
+    .product-info,
+    .product-info h1,
+    .product-info > p:first-of-type,
+    .product-info h2,
+    .back-link,
+    .total-price {
+        animation: none !important;
+    }
+
+    *, *::before, *::after {
+        transition-duration: .01ms !important;
+    }
+}
+  
+    </style>
+</head>
+<body>
+    <main class="product-page">
+        <a class="back-link" href="/">← Retour au menu</a>
+
+        <img class="product-photo"
+             src="{{ url_for('static', filename=image) }}"
+             alt="{{ name }}">
+
+        <section class="product-info">
+            <h1>{{ name }}</h1>
+            <p>{{ description }}</p>
+            <p>Une boîte contient 8 pièces.</p>
+
+            <p style="margin-top:20px">Prix d'une boîte :</p>
+            <h2>{{ price }} TND</h2>
+
+            <div class="quantity-control">
+                <button type="button" onclick="changeQuantity(-1)">−</button>
+                <span id="quantity">1</span>
+                <button type="button" onclick="changeQuantity(1)">+</button>
+            </div>
+
+            <p class="total-price">
+                Total : <span id="total">{{ price }}</span> TND
+            </p>
+
+            <a class="instagram-button"
+               href="https://www.instagram.com/sushi_by_fedia/"
+               target="_blank" rel="noopener">
+                Commander sur Instagram
+            </a>
+        </section>
+    </main>
+
+    <script>
+        const unitPrice = Number({{ price|tojson }});
+        let quantity = 1;
+
+        function changeQuantity(change) {
+            quantity = Math.max(1, quantity + change);
+            document.getElementById("quantity").textContent = quantity;
+            document.getElementById("total").textContent =
+                (quantity * unitPrice).toFixed(0);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sushi by Fedia</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <header class="hero">
+        <nav class="navbar">
+            <h2>Sushi by Fedia 🍣</h2>
+            <a href="#menu">Découvrir le menu</a>
+        </nav>
+
+        <div class="hero-content">
+            <p class="subtitle">FAIT AVEC AMOUR ♡</p>
+            <h1>Le sushi qui fait<br>fondre votre cœur.</h1>
+            <p>Des saveurs délicieuses, préparées avec soin.</p>
+            <a class="main-button" href="#menu">Voir nos sushis</a>
+        </div>
+    </header>
+
+    <section id="menu" class="menu-section">
+        <p class="subtitle">NOTRE SÉLECTION</p>
+        <h2>Notre menu 🍣</h2>
+        <p class="section-description">
+            Découvrez nos délicieux sushis.
+        </p>
+
+        <div class="products">
+
+            <article class="card">
+                <a href="/product/1">
+    <img src="{{ url_for('static', filename='images/844684451_946405118151474_3432577056852962605_n.jpg') }}" alt="Sushi crevette avocat fromage">
+</a>
+                <h3>Crevette, avocat & fromage</h3>
+                <p>8 pièces</p>
+                
+<div class="product-bottom">
+    <label for="quantity-1">Quantité :</label>
+    <select id="quantity-1" onchange="updatePrice(1, 21)">
+        <option value="1">1 boîte</option>
+        <option value="2">2 boîtes</option>
+        <option value="3">3 boîtes</option>
+        <option value="4">4 boîtes</option>
+        <option value="5">5 boîtes</option>
+    </select>
+
+    <span class="price" id="price-1">21 TND</span>
+    <a class="order-button" href="https://www.instagram.com/sushi_by_fedia/" target="_blank">Commander</a>
+</div>
+
+            </article>
+
+            <article class="card">
+ 
+<a href="/product/2">
+    <img src="{{ url_for('static', filename='images/849476763_1609711274222892_6667936430413566145_n.jpg') }}" alt="Sushi crevette concombre fromage">
+</a>
+               <h3>Crevette, concombre & fromage</h3>
+                <p>8 pièces</p>
+                <div class="product-bottom">
+                    <span class="price">20 TND</span>
+                    <a class="order-button" href="https://www.instagram.com/sushi_by_fedia/" target="_blank">Commander</a>
+                </div>
+            </article>
+
+            <article class="card">
+
+<a href="/product/3">
+    <img src="{{ url_for('static', filename='images/849550158_995083413641899_1238495075351724402_n.jpg') }}" alt="Sushi poulet avocat fromage">
+</a>
+                <h3>Poulet, avocat & fromage</h3>
+                <p>8 pièces</p>
+                <div class="product-bottom">
+                    <span class="price">20 TND</span>
+                    <a class="order-button" href="https://www.instagram.com/sushi_by_fedia/" target="_blank">Commander</a>
+                </div>
+            </article>
+
+            <article class="card">
+
+<a href="/product/4">
+    <img src="{{ url_for('static', filename='images/850736319_1128435336778406_2112592734505842864_n.jpg') }}" alt="Sushi poulet concombre fromage">
+</a>
+                <h3>Poulet, concombre & fromage</h3>
+                <p>8 pièces</p>
+                <div class="product-bottom">
+                    <span class="price">19 TND</span>
+                    <a class="order-button" href="https://www.instagram.com/sushi_by_fedia/" target="_blank">Commander</a>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <footer>
+        <h2>Sushi by Fedia ♡</h2>
+        <p>Merci pour votre confiance !</p>
+        <a href="https://www.instagram.com/sushi_by_fedia/" target="_blank">
+            Retrouvez-nous sur Instagram
+        </a>
+    </footer>
+
+<script>
+function updatePrice(id, unitPrice) {
+    const quantity = document.getElementById("quantity-" + id).value;
+    const total = quantity * unitPrice;
+    document.getElementById("price-" + id).textContent = total + " TND";
+}
+</script>
+
+</body>
+</html>
